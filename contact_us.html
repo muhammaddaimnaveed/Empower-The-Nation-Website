@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/graduation-cap.png">
+    <link rel="stylesheet" href="style.css">
+    <title>Empower The Nation</title>
+</head>
+
+<header>
+    <nav class="navigation_bar">
+        <div class="logo">
+            <span>Empower the Nation</span>
+            <img src="images/graduation-cap.png" alt="Logo">
+        </div>    
+
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about_us.html">About Us</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="contact_us.html">Contact Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<body>
+    <section id="main1">
+        <br>
+        <h1>Contact Us</h1>
+    </section>
+
+    <section id="contactform">
+        <br><br><br><br>
+        <div class="contact-form">
+            <form id="contactForm" action="submit_form.php" method="post" onsubmit="calculateTotal(); return false;">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="number" id="phone" name="phone" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <fieldset>
+                    <legend>Six-Week Course</legend>
+                    <label>
+                        <input type="checkbox" class="course" data-price="750" onchange="calculateTotal()"> Child Minding (R750)
+                    </label><br>
+                    <label>
+                        <input type="checkbox" class="course" data-price="750" onchange="calculateTotal()"> Cooking (R750)
+                    </label><br>
+                    <label>
+                        <input type="checkbox" class="course" data-price="750" onchange="calculateTotal()"> Garden Maintenance (R750)
+                    </label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Six-Month Course</legend>
+                    <label>
+                        <input type="checkbox" class="course" data-price="1500" onchange="calculateTotal()"> First Aid (R1500)
+                    </label><br>
+                    <label>
+                        <input type="checkbox" class="course" data-price="1500" onchange="calculateTotal()"> Sewing (R1500)
+                    </label><br>
+                    <label>
+                        <input type="checkbox" class="course" data-price="1500" onchange="calculateTotal()"> Landscaping (R1500)
+                    </label><br>
+                    <label>
+                        <input type="checkbox" class="course" data-price="1500" onchange="calculateTotal()"> Life Skills (R1500)
+                    </label>
+                </fieldset>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+
+                <label for="discount">Discount Applied:</label>
+                <input type="text" id="discount" name="discount" readonly style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+
+                <label for="total">Total Price:</label>
+                <input type="text" id="total" name="total" readonly style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+
+                <a href="contactform.html" class="applybutton">Apply</a>
+            </form>
+        </div>
+        <br><br><br><br>
+
+        <script>
+            function calculateTotal() {
+                const courses = document.querySelectorAll('.course');
+                let total = 0;
+                let selectedCount = 0;
+
+                
+                courses.forEach(course => {
+                    if (course.checked) {
+                        total += parseFloat(course.dataset.price);
+                        selectedCount++;
+                    }
+                });
+
+             
+                let discount = 0;
+                let discountPercentage = 0;
+
+                if (selectedCount === 2) {
+                    discountPercentage = 5;
+                    discount = total * 0.05; 
+                } else if (selectedCount === 3) {
+                    discountPercentage = 10;
+                    discount = total * 0.10; 
+                } else if (selectedCount > 3) {
+                    discountPercentage = 15;
+                    discount = total * 0.15;
+                }
+
+                const finalTotal = total - discount;
+
+                document.getElementById('total').value = `R${finalTotal.toFixed(2)}`; 
+                document.getElementById('discount').value = discountPercentage > 0 ? `${discountPercentage}% Discount Applied` : 'No Discount';
+            }
+        </script>
+    </section>
+</body>
+
+<footer>
+    <div class="footer-container">
+        <div class="social-media">
+            <p>Facebook &nbsp; &nbsp;&nbsp;&nbsp;
+            Twitter &nbsp; &nbsp;&nbsp;&nbsp;
+            Instagram</p>
+        </div>
+      
+        <div class="contact-info">
+            <p>072 564 8934 <br><br>
+            082 895 7348 <br><br>
+            empowerthenation@gmail.com <br><br>
+            426 Park Avenue, Johannesburg <br><br>
+            12 Melville, Johannesburg <br><br>
+            4 Linden, Johannesburg
+            </p>
+        </div>
+      
+        <div class="copyright">
+            <p>&copy; 2024 Empower The Nation. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+</html>
